@@ -9,21 +9,45 @@
 /* Begin PBXBuildFile section */
 		6AE2304C25FB5CE8004A55DB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2304B25FB5CE8004A55DB /* AppDelegate.swift */; };
 		6AE2304E25FB5CE8004A55DB /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2304D25FB5CE8004A55DB /* SceneDelegate.swift */; };
-		6AE2305025FB5CE8004A55DB /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2304F25FB5CE8004A55DB /* ViewController.swift */; };
-		6AE2305325FB5CE8004A55DB /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AE2305125FB5CE8004A55DB /* Main.storyboard */; };
 		6AE2305525FB5CEC004A55DB /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 6AE2305425FB5CEC004A55DB /* Assets.xcassets */; };
 		6AE2305825FB5CEC004A55DB /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 6AE2305625FB5CEC004A55DB /* LaunchScreen.storyboard */; };
+		6AE2306125FB5D10004A55DB /* AsyncImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2306025FB5D10004A55DB /* AsyncImageDownloader.swift */; };
+		6AE2306425FB5D1B004A55DB /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2306325FB5D1B004A55DB /* Extensions.swift */; };
+		6AE2306725FB5D24004A55DB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2306625FB5D24004A55DB /* NetworkService.swift */; };
+		6AE2306A25FB5D2D004A55DB /* GenericTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2306925FB5D2D004A55DB /* GenericTableView.swift */; };
+		6AE2306D25FB5D38004A55DB /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2306C25FB5D38004A55DB /* Protocols.swift */; };
+		6AE2307425FB5F46004A55DB /* GHListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307325FB5F46004A55DB /* GHListViewController.swift */; };
+		6AE2307625FB5F55004A55DB /* GHDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307525FB5F55004A55DB /* GHDetailViewController.swift */; };
+		6AE2307825FB6106004A55DB /* BaseTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307725FB6106004A55DB /* BaseTableViewCell.swift */; };
+		6AE2307A25FB63CE004A55DB /* EndPoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307925FB63CE004A55DB /* EndPoint.swift */; };
+		6AE2307C25FB742A004A55DB /* GHRepoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307B25FB742A004A55DB /* GHRepoModel.swift */; };
+		6AE2307E25FB78F2004A55DB /* GHListTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2307D25FB78F2004A55DB /* GHListTableViewCell.swift */; };
+		6AE2308225FB7995004A55DB /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308025FB7994004A55DB /* OverlayView.swift */; };
+		6AE2308325FB7995004A55DB /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308125FB7994004A55DB /* AlertService.swift */; };
+		6AE2308525FB846A004A55DB /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308425FB846A004A55DB /* CachedImageView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		6AE2304825FB5CE8004A55DB /* FundsIndiaSystemTask.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = FundsIndiaSystemTask.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		6AE2304B25FB5CE8004A55DB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		6AE2304D25FB5CE8004A55DB /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		6AE2304F25FB5CE8004A55DB /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		6AE2305225FB5CE8004A55DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		6AE2305425FB5CEC004A55DB /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		6AE2305725FB5CEC004A55DB /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		6AE2305925FB5CEC004A55DB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		6AE2306025FB5D10004A55DB /* AsyncImageDownloader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AsyncImageDownloader.swift; sourceTree = "<group>"; };
+		6AE2306325FB5D1B004A55DB /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		6AE2306625FB5D24004A55DB /* NetworkService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		6AE2306925FB5D2D004A55DB /* GenericTableView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GenericTableView.swift; sourceTree = "<group>"; };
+		6AE2306C25FB5D38004A55DB /* Protocols.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
+		6AE2307325FB5F46004A55DB /* GHListViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHListViewController.swift; sourceTree = "<group>"; };
+		6AE2307525FB5F55004A55DB /* GHDetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHDetailViewController.swift; sourceTree = "<group>"; };
+		6AE2307725FB6106004A55DB /* BaseTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseTableViewCell.swift; sourceTree = "<group>"; };
+		6AE2307925FB63CE004A55DB /* EndPoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EndPoint.swift; sourceTree = "<group>"; };
+		6AE2307B25FB742A004A55DB /* GHRepoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHRepoModel.swift; sourceTree = "<group>"; };
+		6AE2307D25FB78F2004A55DB /* GHListTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHListTableViewCell.swift; sourceTree = "<group>"; };
+		6AE2308025FB7994004A55DB /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
+		6AE2308125FB7994004A55DB /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
+		6AE2308425FB846A004A55DB /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,15 +80,115 @@
 		6AE2304A25FB5CE8004A55DB /* FundsIndiaSystemTask */ = {
 			isa = PBXGroup;
 			children = (
-				6AE2304B25FB5CE8004A55DB /* AppDelegate.swift */,
-				6AE2304D25FB5CE8004A55DB /* SceneDelegate.swift */,
-				6AE2304F25FB5CE8004A55DB /* ViewController.swift */,
-				6AE2305125FB5CE8004A55DB /* Main.storyboard */,
-				6AE2305425FB5CEC004A55DB /* Assets.xcassets */,
-				6AE2305625FB5CEC004A55DB /* LaunchScreen.storyboard */,
-				6AE2305925FB5CEC004A55DB /* Info.plist */,
+				6AE2306E25FB5D3D004A55DB /* Model */,
+				6AE2306F25FB5D41004A55DB /* View */,
+				6AE2307025FB5D46004A55DB /* Controller */,
+				6AE2307125FB5D4D004A55DB /* Delegate */,
+				6AE2306B25FB5D38004A55DB /* Protocols */,
+				6AE2306825FB5D2D004A55DB /* Common */,
+				6AE2306525FB5D24004A55DB /* Service Layer */,
+				6AE2306225FB5D1B004A55DB /* Extensions */,
+				6AE2307F25FB7994004A55DB /* Utils */,
+				6AE2307225FB5D6C004A55DB /* Auxiliary */,
+				6AE2305F25FB5D10004A55DB /* AsyncImageDownloader */,
 			);
 			path = FundsIndiaSystemTask;
+			sourceTree = "<group>";
+		};
+		6AE2305F25FB5D10004A55DB /* AsyncImageDownloader */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2306025FB5D10004A55DB /* AsyncImageDownloader.swift */,
+				6AE2308425FB846A004A55DB /* CachedImageView.swift */,
+			);
+			path = AsyncImageDownloader;
+			sourceTree = "<group>";
+		};
+		6AE2306225FB5D1B004A55DB /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2306325FB5D1B004A55DB /* Extensions.swift */,
+			);
+			path = Extensions;
+			sourceTree = "<group>";
+		};
+		6AE2306525FB5D24004A55DB /* Service Layer */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2306625FB5D24004A55DB /* NetworkService.swift */,
+				6AE2307925FB63CE004A55DB /* EndPoint.swift */,
+			);
+			path = "Service Layer";
+			sourceTree = "<group>";
+		};
+		6AE2306825FB5D2D004A55DB /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2306925FB5D2D004A55DB /* GenericTableView.swift */,
+			);
+			path = Common;
+			sourceTree = "<group>";
+		};
+		6AE2306B25FB5D38004A55DB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2306C25FB5D38004A55DB /* Protocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		6AE2306E25FB5D3D004A55DB /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2307B25FB742A004A55DB /* GHRepoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		6AE2306F25FB5D41004A55DB /* View */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2307725FB6106004A55DB /* BaseTableViewCell.swift */,
+				6AE2307D25FB78F2004A55DB /* GHListTableViewCell.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		6AE2307025FB5D46004A55DB /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2307325FB5F46004A55DB /* GHListViewController.swift */,
+				6AE2307525FB5F55004A55DB /* GHDetailViewController.swift */,
+			);
+			path = Controller;
+			sourceTree = "<group>";
+		};
+		6AE2307125FB5D4D004A55DB /* Delegate */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2304B25FB5CE8004A55DB /* AppDelegate.swift */,
+				6AE2304D25FB5CE8004A55DB /* SceneDelegate.swift */,
+			);
+			path = Delegate;
+			sourceTree = "<group>";
+		};
+		6AE2307225FB5D6C004A55DB /* Auxiliary */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2305925FB5CEC004A55DB /* Info.plist */,
+				6AE2305625FB5CEC004A55DB /* LaunchScreen.storyboard */,
+				6AE2305425FB5CEC004A55DB /* Assets.xcassets */,
+			);
+			path = Auxiliary;
+			sourceTree = "<group>";
+		};
+		6AE2307F25FB7994004A55DB /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				6AE2308025FB7994004A55DB /* OverlayView.swift */,
+				6AE2308125FB7994004A55DB /* AlertService.swift */,
+			);
+			path = Utils;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -127,7 +251,6 @@
 			files = (
 				6AE2305825FB5CEC004A55DB /* LaunchScreen.storyboard in Resources */,
 				6AE2305525FB5CEC004A55DB /* Assets.xcassets in Resources */,
-				6AE2305325FB5CE8004A55DB /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,23 +261,28 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				6AE2305025FB5CE8004A55DB /* ViewController.swift in Sources */,
+				6AE2306A25FB5D2D004A55DB /* GenericTableView.swift in Sources */,
+				6AE2306425FB5D1B004A55DB /* Extensions.swift in Sources */,
+				6AE2306125FB5D10004A55DB /* AsyncImageDownloader.swift in Sources */,
 				6AE2304C25FB5CE8004A55DB /* AppDelegate.swift in Sources */,
+				6AE2308325FB7995004A55DB /* AlertService.swift in Sources */,
+				6AE2307A25FB63CE004A55DB /* EndPoint.swift in Sources */,
+				6AE2308525FB846A004A55DB /* CachedImageView.swift in Sources */,
+				6AE2306725FB5D24004A55DB /* NetworkService.swift in Sources */,
+				6AE2307C25FB742A004A55DB /* GHRepoModel.swift in Sources */,
+				6AE2307625FB5F55004A55DB /* GHDetailViewController.swift in Sources */,
+				6AE2307E25FB78F2004A55DB /* GHListTableViewCell.swift in Sources */,
+				6AE2308225FB7995004A55DB /* OverlayView.swift in Sources */,
 				6AE2304E25FB5CE8004A55DB /* SceneDelegate.swift in Sources */,
+				6AE2306D25FB5D38004A55DB /* Protocols.swift in Sources */,
+				6AE2307825FB6106004A55DB /* BaseTableViewCell.swift in Sources */,
+				6AE2307425FB5F46004A55DB /* GHListViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		6AE2305125FB5CE8004A55DB /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				6AE2305225FB5CE8004A55DB /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		6AE2305625FB5CEC004A55DB /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -286,7 +414,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HB7U37F739;
-				INFOPLIST_FILE = FundsIndiaSystemTask/Info.plist;
+				INFOPLIST_FILE = "/Users/pradeepkumar/Desktop/SwiftUI Demo/FundsIndiaSystemTask/FundsIndiaSystemTask/Auxiliary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -304,7 +432,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = HB7U37F739;
-				INFOPLIST_FILE = FundsIndiaSystemTask/Info.plist;
+				INFOPLIST_FILE = "/Users/pradeepkumar/Desktop/SwiftUI Demo/FundsIndiaSystemTask/FundsIndiaSystemTask/Auxiliary/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
