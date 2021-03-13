@@ -25,6 +25,11 @@
 		6AE2308225FB7995004A55DB /* OverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308025FB7994004A55DB /* OverlayView.swift */; };
 		6AE2308325FB7995004A55DB /* AlertService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308125FB7994004A55DB /* AlertService.swift */; };
 		6AE2308525FB846A004A55DB /* CachedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308425FB846A004A55DB /* CachedImageView.swift */; };
+		6AE2308725FC7607004A55DB /* GHUserModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308625FC7607004A55DB /* GHUserModel.swift */; };
+		6AE2308925FC7620004A55DB /* GHSubscriptionModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308825FC7620004A55DB /* GHSubscriptionModel.swift */; };
+		6AE2308B25FC7C59004A55DB /* BaseCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308A25FC7C59004A55DB /* BaseCollectionCell.swift */; };
+		6AE2308D25FC7F73004A55DB /* GHSubscriptionCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308C25FC7F73004A55DB /* GHSubscriptionCollectionCell.swift */; };
+		6AE2308F25FC8288004A55DB /* GHSubHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6AE2308E25FC8288004A55DB /* GHSubHeader.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -48,6 +53,11 @@
 		6AE2308025FB7994004A55DB /* OverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayView.swift; sourceTree = "<group>"; };
 		6AE2308125FB7994004A55DB /* AlertService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AlertService.swift; sourceTree = "<group>"; };
 		6AE2308425FB846A004A55DB /* CachedImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CachedImageView.swift; sourceTree = "<group>"; };
+		6AE2308625FC7607004A55DB /* GHUserModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHUserModel.swift; sourceTree = "<group>"; };
+		6AE2308825FC7620004A55DB /* GHSubscriptionModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHSubscriptionModel.swift; sourceTree = "<group>"; };
+		6AE2308A25FC7C59004A55DB /* BaseCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionCell.swift; sourceTree = "<group>"; };
+		6AE2308C25FC7F73004A55DB /* GHSubscriptionCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHSubscriptionCollectionCell.swift; sourceTree = "<group>"; };
+		6AE2308E25FC8288004A55DB /* GHSubHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GHSubHeader.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -141,6 +151,8 @@
 			isa = PBXGroup;
 			children = (
 				6AE2307B25FB742A004A55DB /* GHRepoModel.swift */,
+				6AE2308625FC7607004A55DB /* GHUserModel.swift */,
+				6AE2308825FC7620004A55DB /* GHSubscriptionModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -148,8 +160,11 @@
 		6AE2306F25FB5D41004A55DB /* View */ = {
 			isa = PBXGroup;
 			children = (
+				6AE2308A25FC7C59004A55DB /* BaseCollectionCell.swift */,
 				6AE2307725FB6106004A55DB /* BaseTableViewCell.swift */,
 				6AE2307D25FB78F2004A55DB /* GHListTableViewCell.swift */,
+				6AE2308C25FC7F73004A55DB /* GHSubscriptionCollectionCell.swift */,
+				6AE2308E25FC8288004A55DB /* GHSubHeader.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -261,13 +276,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6AE2308725FC7607004A55DB /* GHUserModel.swift in Sources */,
 				6AE2306A25FB5D2D004A55DB /* GenericTableView.swift in Sources */,
+				6AE2308F25FC8288004A55DB /* GHSubHeader.swift in Sources */,
 				6AE2306425FB5D1B004A55DB /* Extensions.swift in Sources */,
 				6AE2306125FB5D10004A55DB /* AsyncImageDownloader.swift in Sources */,
 				6AE2304C25FB5CE8004A55DB /* AppDelegate.swift in Sources */,
 				6AE2308325FB7995004A55DB /* AlertService.swift in Sources */,
 				6AE2307A25FB63CE004A55DB /* EndPoint.swift in Sources */,
 				6AE2308525FB846A004A55DB /* CachedImageView.swift in Sources */,
+				6AE2308B25FC7C59004A55DB /* BaseCollectionCell.swift in Sources */,
 				6AE2306725FB5D24004A55DB /* NetworkService.swift in Sources */,
 				6AE2307C25FB742A004A55DB /* GHRepoModel.swift in Sources */,
 				6AE2307625FB5F55004A55DB /* GHDetailViewController.swift in Sources */,
@@ -275,6 +293,8 @@
 				6AE2308225FB7995004A55DB /* OverlayView.swift in Sources */,
 				6AE2304E25FB5CE8004A55DB /* SceneDelegate.swift in Sources */,
 				6AE2306D25FB5D38004A55DB /* Protocols.swift in Sources */,
+				6AE2308925FC7620004A55DB /* GHSubscriptionModel.swift in Sources */,
+				6AE2308D25FC7F73004A55DB /* GHSubscriptionCollectionCell.swift in Sources */,
 				6AE2307825FB6106004A55DB /* BaseTableViewCell.swift in Sources */,
 				6AE2307425FB5F46004A55DB /* GHListViewController.swift in Sources */,
 			);

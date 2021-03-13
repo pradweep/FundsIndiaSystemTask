@@ -45,11 +45,16 @@ extension EndPoint {
         return .init(path: "/users/\(userName)/following")
     }
     
-    static func getUserLocation(by userName: String) -> Self {
+    static func getUserData(by userName: String) -> Self {
          return .init(path: "/users/\(userName)")
     }
     
     static func getUserRepos(by userName: String) -> Self {
         return .init(path: "/users/\(userName)/repos")
     }
+    
+    static func getUserSubscriptions(by userName: String) -> Self {
+        return .init(path: "/users/\(userName)/subscriptions")
+    }
+    
 }

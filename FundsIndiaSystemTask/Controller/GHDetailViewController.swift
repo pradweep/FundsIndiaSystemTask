@@ -8,33 +8,15 @@
 
 import UIKit
 
-
-struct GHFollowersModel: Decodable {
-    var login: String?
-}
-
-struct GHFollowingModel: Decodable {
-    var login: String?
-}
-
-struct GHUserModel: Decodable {
-    var location: String?
-}
-
-struct GHUserRepos: Decodable {
-    var name: String?
-}
-
 class GHDetailViewController: UIViewController {
     
     //MARK: - Private Properties
     
     private var ghRepoModel: GHRepoModel!
-    private var followers: Int?
-    private var following: Int?
-    private var userLocation: String?
-    private var userRepos: Int?
+    private var ghUserModel: GHUserModel?
+    private var ghSubscriptionModel: [GHSubscriptionModel]?
     private let dispatchGroup = DispatchGroup()
+    static let sectionHeaderElementKind = "section-header-element-kind"
     
     //MARK: - Views
     
@@ -53,7 +35,7 @@ class GHDetailViewController: UIViewController {
     private lazy var followersLabel: UILabel = {
         let label = UILabel()
         label.attributedText = self.setAttributedText("---", subtitle: "Followers")
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .bold)
         label.numberOfLines = 0
         label.isHidden = true
         label.textAlignment = .center
@@ -63,7 +45,7 @@ class GHDetailViewController: UIViewController {
     private lazy var followingLabel: UILabel = {
         let label = UILabel()
         label.attributedText = self.setAttributedText("---", subtitle: "Following")
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .bold)
         label.numberOfLines = 0
         label.isHidden = true
         label.textAlignment = .center
@@ -73,7 +55,7 @@ class GHDetailViewController: UIViewController {
     private lazy var userPostsLabel: UILabel = {
         let label = UILabel()
         label.attributedText = self.setAttributedText("---", subtitle: "Posts")
-        label.font = .systemFont(ofSize: 17, weight: .bold)
+        label.font = .systemFont(ofSize: 15, weight: .bold)
         label.numberOfLines = 0
         label.isHidden = true
         label.textAlignment = .center
@@ -97,20 +79,6 @@ class GHDetailViewController: UIViewController {
         return sv
     }()
     
-    private lazy var rootStackView: UIStackView = {
-        let sv = UIStackView.init(arrangedSubviews: [
-            hStackView,
-            UIView()
-        ])
-        sv.axis = .vertical
-        sv.distribution = .fill
-        sv.alignment = .fill
-        sv.isLayoutMarginsRelativeArrangement = true
-        sv.spacing = 12
-        sv.layoutMargins = .init(top: 24, left: 0, bottom: 12, right: 0)
-        return sv
-    }()
-    
     private lazy var pinImageView: UIImageView = {
         let v = UIImageView()
         v.image = #imageLiteral(resourceName: "ic_location").withRenderingMode(.alwaysTemplate)
@@ -122,7 +90,8 @@ class GHDetailViewController: UIViewController {
     
     private lazy var locationLabel: UILabel = {
         let v = UILabel()
-        v.text = "San Fransisco"
+        v.text = "---"
+        v.sizeToFit()
         return v
     }()
     
@@ -136,6 +105,27 @@ class GHDetailViewController: UIViewController {
         sv.alignment = .center
         sv.spacing = 8
         sv.isHidden = true
+        return sv
+    }()
+    
+    private lazy var subscriptionCollectionView: UICollectionView = {
+        let cv = UICollectionView(frame: .zero, collectionViewLayout: self.generateFlowLayout())
+        cv.delegate = self
+        cv.dataSource = self
+        return cv
+    }()
+    
+    private lazy var rootStackView: UIStackView = {
+        let sv = UIStackView.init(arrangedSubviews: [
+            hStackView,
+            UIView()
+        ])
+        sv.axis = .vertical
+        sv.distribution = .fill
+        sv.alignment = .fill
+        sv.isLayoutMarginsRelativeArrangement = true
+        sv.spacing = 12
+        sv.layoutMargins = .init(top: 24, left: 0, bottom: 12, right: 0)
         return sv
     }()
     
@@ -161,17 +151,20 @@ class GHDetailViewController: UIViewController {
     
     fileprivate func configureViewComponents(){
         self.view.backgroundColor = .white
+        self.configureCollectionView()
         self.setupConstraints()
         self.configureNavBar()
         self.updateUI()
     }
     
     fileprivate func setupConstraints() {
-        self.view.addSubview(rootStackView)
-        self.view.addSubview(locationStackView)
+        self.view.addSubviewsToParent(rootStackView,
+                                      locationStackView,
+                                      subscriptionCollectionView)
         locationStackView.anchor(top: avatarImageView.bottomAnchor, leading: nil, bottom: nil, trailing: nil, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: .init())
         locationStackView.centerXAnchor.constraint(equalTo: self.avatarImageView.centerXAnchor).isActive = true
         rootStackView.fillSuperview()
+        subscriptionCollectionView.anchor(top: self.locationStackView.bottomAnchor, leading: self.view.leadingAnchor, bottom: self.view.bottomAnchor, trailing: self.view.trailingAnchor, padding: .init(top: 12, left: 0, bottom: 0, right: 0), size: .init())
     }
     
     fileprivate func configureNavBar() {
@@ -183,111 +176,62 @@ class GHDetailViewController: UIViewController {
     
     fileprivate func updateUI() {
         self.title = self.ghRepoModel.name?.capitalizingFirstLetter()
-        if let strAvatar = self.ghRepoModel.owner?.avatar_url {
-            self.avatarImageView.loadImage(urlString: strAvatar) {
-                self.avatarImageView.isHidden = false
-            }
-        }
     }
     
     fileprivate func setAttributedText(_ title: String, subtitle: String) -> NSAttributedString {
-        let attributedLabel = NSMutableAttributedString(string: "\(title)\n", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 20, weight: .bold)])
-        attributedLabel.append(NSAttributedString.init(string: subtitle, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 15, weight: .regular)]))
+        let attributedLabel = NSMutableAttributedString(string: "\(title)\n", attributes: [NSAttributedString.Key.foregroundColor : UIColor.black, NSAttributedString.Key.font: UIFont.systemFont(ofSize: 18, weight: .bold)])
+        attributedLabel.append(NSAttributedString.init(string: subtitle, attributes: [NSAttributedString.Key.foregroundColor : UIColor.lightGray,NSAttributedString.Key.font: UIFont.systemFont(ofSize: 13, weight: .regular)]))
         return attributedLabel
     }
     
     private func executeConcurrentCalls() {
-        
         dispatchGroup.enter()
-        self.fetchFollowers { flag in
+        self.fetchUserData { flag in
             self.dispatchGroup.leave()
         }
         
         dispatchGroup.enter()
-        self.fetchFollowing { flag in
+        self.fetchSubscriptionData { flag in
+            self.subscriptionCollectionView.reloadData()
             self.dispatchGroup.leave()
         }
         
-        dispatchGroup.enter()
-        self.fetchUserLocation { flag in
-            self.dispatchGroup.leave()
-        }
-        
-        dispatchGroup.enter()
-        self.fetchUserRepos { flag in
-            self.dispatchGroup.leave()
-        }
-    
         dispatchGroup.notify(queue: .main) {
             OverlayView.sharedInstance.hideOverlay()
-            print("*** Both apis are executed concurrently ***")
-            self.updateLabelComponents()
         }
     }
     
     //MARK: - API Call
     
-    private func executeFollowersService(completion: @escaping (Result<[GHFollowersModel], APIError>) -> ()) {
-        NetworkService.sharedInstance.fetchData(endPoint: .getFollowers(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
+    private func executeUserDataService(completion: @escaping (Result<GHUserModel, APIError>) -> ()) {
+        NetworkService.sharedInstance.fetchData(endPoint: .getUserData(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
     }
     
-    private func fetchFollowers(completion: @escaping (Bool) -> Void) {
-        self.executeFollowersService { result in
-            switch result {
-            case .success(let followers):
-                print("Followers count: \(followers.count)")
-                self.followers = followers.count
-                completion(true)
-            case .failure(let error):
-                completion(false)
-                print("Error while retreving the followers: \(error)")
-            }
-        }
-    }
-    
-    private func executeFollowingService(completion: @escaping (Result<[GHFollowingModel], APIError>) -> ()) {
-        NetworkService.sharedInstance.fetchData(endPoint: .getFollowing(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
-    }
-    
-    private func fetchFollowing(completion:@escaping (Bool) -> Void) {
-        self.executeFollowingService { result in
-            switch result {
-            case .success(let followings):
-                self.following = followings.count
-                completion(true)
-            case .failure(let error):
-                completion(false)
-                print("Error while retreving the following: \(error)")
-            }
-        }
-    }
-    
-    private func executeUserLocationService(completion: @escaping (Result<GHUserModel, APIError>) -> ()) {
-        NetworkService.sharedInstance.fetchData(endPoint: .getUserLocation(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
-    }
-    
-    private func fetchUserLocation(completion:@escaping (Bool) -> Void) {
-        self.executeUserLocationService { result in
+    private func fetchUserData(completion:@escaping (Bool) -> Void) {
+        self.executeUserDataService { result in
             switch result {
             case .success(let userModel):
-                self.userLocation = userModel.location
+                self.ghUserModel = userModel
+                self.updateLabelComponents(with: self.ghUserModel)
                 completion(true)
+                OverlayView.sharedInstance.hideOverlay()
             case .failure(let error):
                 completion(false)
                 print("Error while retreving the user location: \(error)")
+                OverlayView.sharedInstance.hideOverlay()
             }
         }
     }
     
-    private func executeUserReposService(completion: @escaping (Result<[GHUserRepos], APIError>) -> ()) {
-        NetworkService.sharedInstance.fetchData(endPoint: .getUserRepos(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
+    private func executeSubscriptionService(completion: @escaping (Result<[GHSubscriptionModel], APIError>) -> ()) {
+        NetworkService.sharedInstance.fetchData(endPoint: .getUserSubscriptions(by: self.ghRepoModel.owner?.login ?? ""), completionHandler: completion)
     }
     
-    private func fetchUserRepos(completion:@escaping (Bool) -> Void) {
-        self.executeUserReposService { result in
+    private func fetchSubscriptionData(completion:@escaping (Bool) -> Void) {
+        self.executeSubscriptionService { result in
             switch result {
-            case .success(let userPosts):
-                self.userRepos = userPosts.count
+            case .success(let subscriptionModel):
+                self.ghSubscriptionModel = subscriptionModel
                 completion(true)
             case .failure(let error):
                 completion(false)
@@ -296,24 +240,30 @@ class GHDetailViewController: UIViewController {
         }
     }
     
-    private func updateLabelComponents() {
+    private func updateLabelComponents(with userModel: GHUserModel?) {
         
-        if let followers = self.followers {
+        if let strAvatar = userModel?.avatar_url {
+            self.avatarImageView.loadImage(urlString: strAvatar) {
+                self.avatarImageView.isHidden = false
+            }
+        }
+        
+        if let followers = userModel?.followers {
             self.followersLabel.isHidden = false
             self.followersLabel.attributedText = self.setAttributedText("\(followers)", subtitle: "Followers")
         }
         
-        if let following = self.following {
+        if let following = userModel?.following {
             self.followingLabel.isHidden = false
             self.followingLabel.attributedText = self.setAttributedText("\(following)", subtitle: "Following")
         }
         
-        if let location = self.userLocation {
+        if let location = userModel?.location {
             self.locationStackView.isHidden = false
             self.locationLabel.text = location
         }
         
-        if let userRepos = self.userRepos {
+        if let userRepos = userModel?.public_repos {
             self.userPostsLabel.isHidden = false
             self.userPostsLabel.attributedText = self.setAttributedText("\(userRepos)", subtitle: "Posts")
         }
@@ -325,4 +275,70 @@ class GHDetailViewController: UIViewController {
         self.navigationController?.popViewController(animated: true)
     }
     
+}
+
+//MARK: - CollectionView Interface
+
+extension GHDetailViewController {
+    
+    private func configureCollectionView() {
+        self.subscriptionCollectionView.showsVerticalScrollIndicator = false
+        self.subscriptionCollectionView.backgroundColor = .white
+        self.subscriptionCollectionView.register(GHSubscriptionCollectionCell.self)
+        self.subscriptionCollectionView.registerHeader(GHSubscriptionHeader.self, kind: GHDetailViewController.sectionHeaderElementKind)
+    }
+    
+    private func generateFlowLayout() -> UICollectionViewLayout {
+        let layout = UICollectionViewCompositionalLayout.init { (section, env) -> NSCollectionLayoutSection? in
+            switch section {
+            case 0:
+                return self.generateGridLayout()
+            default:
+                break
+            }
+            return nil
+        }
+        return layout
+    }
+    
+    private func generateGridLayout() -> NSCollectionLayoutSection {
+        let itemSize = NSCollectionLayoutSize.init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.33))
+        let item = NSCollectionLayoutItem.init(layoutSize: itemSize)
+        item.contentInsets = .init(top: 8, leading: 8, bottom: 8, trailing: 8)
+        let groupSize = NSCollectionLayoutSize.init(widthDimension: .fractionalWidth(1.0), heightDimension: .fractionalWidth(0.33))
+        let group = NSCollectionLayoutGroup.horizontal(layoutSize: groupSize, subitem: item, count: 3)
+        let section = NSCollectionLayoutSection.init(group: group)
+        let headerSize = NSCollectionLayoutSize.init(widthDimension: .fractionalWidth(1.0), heightDimension: .absolute(44))
+        let sectionHeader = NSCollectionLayoutBoundarySupplementaryItem(
+            layoutSize: headerSize,
+            elementKind: GHDetailViewController.sectionHeaderElementKind, alignment: .top)
+        section.boundarySupplementaryItems = [sectionHeader]
+        return section
+    }
+    
+}
+
+//MARK: - UICollectionView Delegate and DataSource
+
+extension GHDetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
+    
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        return 1
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return self.ghSubscriptionModel?.count ?? 0
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        let cell: GHSubscriptionCollectionCell = collectionView.dequeueReusableCell(forIndexPath: indexPath)
+        cell.setData(with: self.ghSubscriptionModel?[indexPath.row] ?? GHSubscriptionModel())
+        return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let header: GHSubscriptionHeader = collectionView.dequeueSuplementaryView(of: kind, at: indexPath)
+        header.sectionHeaderLabel.text = "Subscriptions"
+        return header
+    }
 }
